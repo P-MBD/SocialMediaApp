@@ -26,6 +26,11 @@ const style = StyleSheet.create({
        position:'absolute',
        right:7,
        top:10,
+       },
+       userStoryContainer:{
+        paddingHorizontal:28,
+        marginTop:12,
+        
        }
 })
 export default style;
