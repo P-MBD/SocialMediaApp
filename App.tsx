@@ -113,11 +113,14 @@ const App = () => {
   // Define state variable for the current page number
   // so that we know how many pages we have fetched already
   const [pageNumber, setPageNumber] = useState(1);
+
   const [postPageNumber, setPostPageNumber] = useState(1);
+
 
   // Define state variable for the loading status of the flatlist,
   // will be used when we'll be fetching data on scroll until we complete the fetch
   const [isLoading, setIsLoading] = useState(false);
+
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
 
   // Define state variable for the data to be rendered in the user story container
@@ -129,6 +132,10 @@ const App = () => {
   const [renderedDataPosts, setRenderedDataPosts] = useState(
     posts.slice(0, pageSize),
   );
+
+
+
+
 
   /**
    * function that returns the data for the page to be fetched
