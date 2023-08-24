@@ -4,19 +4,27 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark, faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
+import style from './style';
+import { inlineStyles } from 'react-native-svg';
 
 const UserPost = (props) => {
     return (
     <View>
-        <View>
-            <View>
-              <Image source={require('../../assets/images/default-profile.png')} />
-                    <Text>
+        <View style={style.userInformationContainer}>
+            <View style={style.userInformation}>
+                <View style={style.image}>
+                    <Image source={require('../../assets/images/default-profile.png')} />
+              </View>
+                 <View style={style.userPostInformation}>
+                    <Text  style={style.name}>
                          {props.firstName} {props.lastName}
                      </Text>
-                    {props.location&&<Text>{props.location}</Text>}
+                     {props.location && (
+              <Text style={style.location}>{props.location}</Text>
+            )}
+                   </View>
             </View>
-            <FontAwesomeIcon icon={faEllipsisH} />
+            <FontAwesomeIcon icon={faEllipsisH} color={'#79869F'} size={22} />
         </View>
         <Image source={require('../../assets/images/default_post.png')}/>
         <View>

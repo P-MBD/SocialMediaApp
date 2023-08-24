@@ -186,7 +186,7 @@ const App = () => {
                     setIsLoading(true);
                     setRenderedData(prev => [
                       ...prev,
-                      ...pagination(data, pageNumber + 1, pageSize),
+                      ...pagination(posts, pageNumber + 1, pageSize),
                     ]);
                     //after updating rendered data we have to set is loading to false, because we loaded the data we needed
                     setIsLoading(false);
