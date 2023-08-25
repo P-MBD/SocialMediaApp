@@ -11,11 +11,6 @@ name:{
     lineHeight:17,
     marginTop:8
 },
-userImageContainer: {
-    borderWidth: 1,
-    borderColor: '#F35BAC',
-    padding: 3,
-    borderRadius: 50,
-  },
+
 })
 export default style;

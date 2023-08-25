@@ -186,7 +186,7 @@ const App = () => {
                     setIsLoading(true);
                     setRenderedData(prev => [
                       ...prev,
-                      ...pagination(posts, pageNumber + 1, pageSize),
+                      ...pagination(data, pageNumber + 1, pageSize),
                     ]);
                     //after updating rendered data we have to set is loading to false, because we loaded the data we needed
                     setIsLoading(false);
@@ -241,6 +241,101 @@ const App = () => {
           </View>
         )}
       />
+
+       {/* Use FlatList to display user posts */}
+       <FlatList
+        ListHeaderComponent={
+          <>
+            {/* Use View to create a container for title and icon */}
+            <View style={style.header}>
+              {/* Use custom Title component to display the title */}
+              <Title title={"Let's Explore"} />
+              {/* Use Pressable to create a clickable component */}
+              <Pressable style={style.messageIcon}>
+                {/* Use FontAwesomeIcon component to display an icon from FontAwesome icon set */}
+                <FontAwesomeIcon
+                  icon={faEnvelope}
+                  color={'#CACDDE'}
+                  size={20}
+                />
+                {/* Use View to create a container for message number */}
+                <View style={style.messageNumberContainer}>
+                  {/* Use Text to display the number of messages */}
+                  <Text style={style.messageNumber}>2</Text>
+                </View>
+              </Pressable>
+            </View>
+            {/* Use View to create a container for the user stories */}
+            <View style={style.userStoryContainer}>
+              {/* Use FlatList to display user stories */}
+              <FlatList
+                onMomentumScrollBegin={() => setIsLoadingPosts(false)}
+                //when the user scrolls through half of the data call onEndReached function
+                onEndReachedThreshold={0.5}
+                keyExtractor={item => item.id.toString()}
+                onEndReached={() => {
+                  //if we are not already in the middle of fetching data then fetch the data
+                  if (!isLoading) {
+                    //set is loading to true because we just started fetching data
+                    setIsLoading(true);
+                    setRenderedData(prev => [
+                      ...prev,
+                      ...pagination(data, pageNumber + 1, pageSize),
+                    ]);
+                    //after updating rendered data we have to set is loading to false, because we loaded the data we needed
+                    setIsLoading(false);
+                  }
+                }}
+                // Hide horizontal scroll indicator
+                showsHorizontalScrollIndicator={false}
+                // Set FlatList to display horizontally
+                horizontal={true}
+                // Pass in data to be rendered in FlatList
+                data={renderedData}
+                // Define how each item should be rendered
+                renderItem={({item}) => (
+                  <UserStory firstName={item.firstName} />
+                )}
+              />
+            </View>
+          </>
+        }
+        //when the user scrolls through half of the data call onEndReached function
+        onMomentumScrollBegin={() => setIsLoadingPosts(false)}
+        onEndReachedThreshold={0.5}
+        keyExtractor={item => item.id.toString() + 'post'}
+        onEndReached={() => {
+          //if we are not already in the middle of fetching data then fetch the data
+          if (!isLoadingPosts) {
+            //set is loading to true because we just started fetching data
+            setIsLoadingPosts(true);
+            setRenderedDataPosts(prev => [
+              ...prev,
+              ...pagination(posts, postPageNumber + 1, pageSizePosts, true),
+            ]);
+            //after updating rendered data we have to set is loading to false, because we loaded the data we needed
+            setIsLoadingPosts(false);
+          }
+        }}
+        // Hide vertical scroll indicator
+        showsVerticalScrollIndicator={false}
+        // Pass in data to be rendered in FlatList
+        data={renderedDataPosts}
+        // Define how each item should be rendered
+        renderItem={({item}) => (
+          <View style={style.userPostContainer}>
+            <UserPost
+              firstName={item.firstName}
+              lastName={item.lastName}
+              comments={item.comments}
+              likes={item.likes}
+              bookmarks={item.bookmarks}
+              location={item.location}
+            />
+          </View>
+        )}
+      />
+
     </SafeAreaView>
   );
 };
