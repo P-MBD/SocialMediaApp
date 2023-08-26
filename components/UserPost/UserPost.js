@@ -9,8 +9,9 @@ import {
   faHeart,
 } from '@fortawesome/free-regular-svg-icons';
 
-import style from './style';
 import UserProfileImage from '../UserProfileImage/UserProfileImage';
+
+import style from './style';
 
 const UserPost = props => {
   return (
